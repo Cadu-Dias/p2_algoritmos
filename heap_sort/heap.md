@@ -21,6 +21,58 @@ Um Heap possui duas propriedades principais:
 
 ---
 
+## Quando um nó em uma árvore binária é considerado um heap?
+
+### ✅ Definição
+
+Um **heap** é uma árvore binária que segue uma propriedade específica:
+
+- **Max-Heap**: Cada nó pai é **maior ou igual** a seus filhos.
+- **Min-Heap**: Cada nó pai é **menor ou igual** a seus filhos.
+
+
+### 📌 Quando um nó é considerado um heap?
+
+Um nó dentro de uma árvore binária é considerado a **raiz de um heap** se:
+
+1. Ele **obedece à propriedade de heap** em relação a seus filhos.
+2. Suas **subárvores (filhos)** também são heaps válidos — ou seja, a propriedade se mantém **recursivamente**.
+
+
+
+### 🧠 Exemplo de Max-Heap
+
+```
+       20
+      /  \
+     15   10
+    / \    \
+   8   7    5
+```
+
+- O nó `20` é maior que `15` e `10`.
+- O nó `15` é maior que `8` e `7`.
+- O nó `10` é maior que `5`.
+
+✅ Todos os nós respeitam a propriedade do Max-Heap.
+
+➡️ **Qualquer um desses nós pode ser considerado a raiz de um heap**, **desde que sua subárvore também seja um heap**.
+
+### ❗ Observações
+
+- Um nó **sem filhos** (nó folha) também é considerado um **heap válido** (heap trivial).
+- A condição de ser um heap **não depende do nó ser a raiz da árvore inteira**, e sim da **subárvore enraizada** nesse nó.
+
+
+### ✅ Conclusão
+
+> Um nó dentro de uma árvore binária é considerado **raiz de um heap** se:
+> - Ele obedece à propriedade de heap em relação aos filhos;
+> - E seus filhos (recursivamente) também obedecem à mesma propriedade.
+
+---
+
+
 ## Representação de um Heap em Array
 
 A propriedade da forma de uma árvore binária completa permite uma representação muito eficiente de um Heap usando um array (ou `ArrayList` em Java, `list` em Python).
