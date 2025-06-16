@@ -8,6 +8,22 @@ O Algoritmo de Dijkstra é um algoritmo de busca de caminho mais curto em grafos
 * **Fonte Única:** Calcula os menores caminhos a partir de um único vértice de origem para todos os outros vértices acessíveis.
 * **Pesos Não Negativos:** Funciona apenas em grafos onde os pesos das arestas (custos, distâncias, tempo, etc.) são maiores ou iguais a zero. Se houver pesos negativos, outros algoritmos como Bellman-Ford devem ser usados.
 * **Algoritmo Guloso:** Em cada passo, ele seleciona o vértice ainda não visitado com a menor distância conhecida a partir da fonte, garantindo a otimalidade local que leva à otimalidade global.
+  
+
+## Como o Dijkstra Lida com Ciclos
+
+A forma como o Dijkstra lida com ciclos é uma característica fundamental de seu design:
+
+* **Ciclos com Pesos Positivos:**
+    * O algoritmo de Dijkstra **funciona corretamente** em grafos com ciclos, desde que todos os pesos das arestas sejam **não-negativos**.
+    * Ele **ignora implicitamente** os ciclos de peso positivo. A lógica do Dijkstra sempre seleciona o vértice com a menor distância *conhecida* e, uma vez que um vértice é "finalizado" (marcado como visitado e sua distância mínima é determinada), ele não será reprocessado de uma forma que aumentaria seu custo.
+    * Se um caminho passasse por um ciclo positivo, o custo aumentaria. Como Dijkstra busca o menor custo, ele naturalmente evitará percorrer arestas adicionais de um ciclo que não levem a um caminho mais curto.
+    * Em outras palavras, se houver um caminho mais curto para um vértice sem passar por um ciclo, esse caminho será encontrado. Se o único caminho envolver um ciclo, o algoritmo não ficará em um loop infinito, pois a soma dos pesos das arestas do ciclo é positiva, e a lógica de seleção de menor distância evita "voltar" ao ciclo desnecessariamente.
+
+* **Ciclos com Pesos Negativos:**
+    * O algoritmo de Dijkstra **NÃO funciona corretamente** em grafos que contêm **ciclos de peso negativo**.
+    * Se houver um ciclo negativo acessível a partir do vértice de origem, o algoritmo entraria em um **loop infinito**, tentando repetidamente atravessar o ciclo para obter um custo cada vez menor (infinitamente negativo).
+    * A lógica de Dijkstra, que uma vez finaliza a distância de um vértice, não permite a "re-descoberta" de um caminho ainda mais curto para aquele vértice através de um ciclo negativo posterior. Isso levaria a resultados incorretos.
 
 ### **Como Funciona (Passo a Passo com Exemplo):**
 

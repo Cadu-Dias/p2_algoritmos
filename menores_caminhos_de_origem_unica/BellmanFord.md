@@ -10,6 +10,20 @@ O Algoritmo de Bellman-Ford é um algoritmo de busca de caminho mais curto em gr
 * **Detecção de Ciclos Negativos:** É capaz de detectar a presença de ciclos de peso negativo acessíveis a partir do vértice de origem. Um ciclo negativo é uma sequência de arestas que começa e termina no mesmo vértice, e a soma dos pesos dessas arestas é negativa. A existência de um ciclo negativo torna o conceito de "caminho mais curto" indefinido, pois você poderia atravessar o ciclo infinitas vezes para diminuir a distância indefinidamente.
 * **Algoritmo Dinâmico:** Ao contrário do Dijkstra guloso, Bellman-Ford é um exemplo de programação dinâmica, construindo a solução de forma iterativa.
 
+
+## Como o Bellman-Ford Lida com Ciclos
+
+A abordagem iterativa do Bellman-Ford é fundamental para sua capacidade de lidar com diferentes tipos de ciclos:
+
+* **Ciclos com Pesos Positivos:**
+    * O Bellman-Ford **funciona corretamente** com ciclos positivos. Assim como o Dijkstra, ele naturalmente evitará percorrer um ciclo positivo repetidamente, pois isso aumentaria o custo do caminho. As relaxações eventuais se estabilizarão.
+
+* **Ciclos com Pesos Negativos:**
+    * Esta é a grande distinção e vantagem do Bellman-Ford. Ele pode **detectar a presença de ciclos de peso negativo** em um grafo.
+    * Um ciclo de peso negativo é problemático para encontrar o "caminho mais curto" porque você poderia atravessar o ciclo repetidamente para fazer o custo do caminho infinitamente pequeno (infinitamente negativo).
+    * **Mecanismo de Detecção:** Após `V-1` iterações, se houver um caminho mais curto de `S` para `V` em um grafo sem ciclos negativos, todas as arestas desse caminho já teriam sido relaxadas e as distâncias teriam se estabilizado. Se na `V`-ésima iteração (ou qualquer iteração subsequente), uma aresta ainda puder ser relaxada (ou seja, `distancia(u) + w < distancia(v)`), isso prova a existência de um ciclo negativo acessível a partir da origem.
+    * Se um ciclo negativo é detectado, o algoritmo geralmente retorna um erro ou um indicador de que os caminhos mais curtos não podem ser determinados.
+
 ### **Como Funciona (Passo a Passo com Exemplo):**
 
 Bellman-Ford funciona relaxando repetidamente todas as arestas do grafo um certo número de vezes.

@@ -10,6 +10,18 @@ O Algoritmo de Kruskal é um algoritmo guloso para encontrar uma **Árvore Gerad
 * **Componentes Conectados:** O algoritmo trabalha construindo uma floresta (um conjunto de árvores) que gradualmente se conecta para formar uma única MST.
 * **Utiliza Estruturas Disjoint Set (Union-Find):** Para verificar eficientemente se a adição de uma aresta forma um ciclo, Kruskal tipicamente usa uma estrutura de dados "Union-Find" (conjuntos disjuntos).
 
+## Como o Kruskal Lida com Ciclos
+
+A detecção e prevenção de ciclos é o **ponto central** do algoritmo de Kruskal:
+
+* **Prevenção Explícita de Ciclos:** O Kruskal **ativamente evita a formação de ciclos**. Em cada passo, antes de adicionar uma aresta à AGM, ele verifica se a aresta conecta dois vértices que já estão no mesmo conjunto (ou componente conectado).
+    * Se a aresta conectar dois vértices que **já estão no mesmo conjunto**, isso significa que esses dois vértices já estão conectados por um caminho de arestas previamente adicionadas à AGM. Adicionar a nova aresta criaria um ciclo. Nesses casos, a aresta é **descartada**.
+    * Se a aresta conectar dois vértices que estão em **conjuntos diferentes**, significa que essa aresta pode ser adicionada sem criar um ciclo. Ela une dois componentes distintos, e os conjuntos correspondentes aos vértices são unidos.
+
+* **Impacto dos Pesos (Negativos ou Positivos):**
+    * O Kruskal **funciona corretamente independentemente dos pesos das arestas serem positivos ou negativos**. O conceito de AGM é sobre o custo total mínimo das conexões que formam uma árvore, não sobre o "caminho" mais curto.
+    * A única restrição é que os pesos devem ser comparáveis para que as arestas possam ser ordenadas. Pesos negativos simplesmente contribuem para um custo total mais baixo da AGM, o que é perfeitamente válido dentro do objetivo do algoritmo.
+
 ### **Como Funciona (Passo a Passo com Exemplo):**
 
 Vamos usar o seguinte grafo não direcionado e ponderado como exemplo, e encontrar sua Árvore Geradora Mínima:
